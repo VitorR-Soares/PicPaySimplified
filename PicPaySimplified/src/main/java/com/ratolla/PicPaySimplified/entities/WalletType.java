@@ -21,4 +21,20 @@ public class WalletType {
     @Column(name = "description")
     private String description;
 
+    public enum Enum{
+        USER(1L, "user"),
+        MERCHANT(2L, "merchant");
+
+        private Long id;
+        private String description;
+
+        Enum(Long id, String description){
+            this.id = id;
+            this.description = description;
+        }
+        public WalletType get(){
+            return new WalletType(id, description);
+        }
+    }
+
 }
