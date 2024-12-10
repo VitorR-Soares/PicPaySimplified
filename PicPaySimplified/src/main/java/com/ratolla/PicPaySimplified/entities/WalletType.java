@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,7 +21,12 @@ public class WalletType {
     @Column(name = "description")
     private String description;
 
-    public enum Enum{
+    public WalletType(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
+    public static enum Enum{
         USER(1L, "user"),
         MERCHANT(2L, "merchant");
 
@@ -32,9 +37,13 @@ public class WalletType {
             this.id = id;
             this.description = description;
         }
+
+        public Long getId(){
+            return id;
+        }
+
         public WalletType get(){
             return new WalletType(id, description);
         }
     }
-
 }
