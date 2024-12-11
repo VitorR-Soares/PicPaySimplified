@@ -19,7 +19,7 @@ public class WalletController {
     }
 
     @PostMapping("/createWallet")
-    public ResponseEntity<Wallet> createWallet(@RequestBody createWalletDTO dto){
+    public ResponseEntity<Wallet> createWallet(@RequestBody @Valid createWalletDTO dto){
 
         var wallet = walletService.createWallet(dto);
 
