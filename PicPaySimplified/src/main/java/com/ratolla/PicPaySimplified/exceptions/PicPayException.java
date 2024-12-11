@@ -3,7 +3,7 @@ package com.ratolla.PicPaySimplified.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
-public abstract class PicPayException extends RuntimeException {
+public class PicPayException extends RuntimeException {
 
     public ProblemDetail toProblemDetail(){
         var pd = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
