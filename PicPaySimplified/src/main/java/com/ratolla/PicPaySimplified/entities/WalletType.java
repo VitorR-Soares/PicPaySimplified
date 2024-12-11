@@ -26,6 +26,9 @@ public class WalletType {
         this.description = description;
     }
 
+    public WalletType() {
+    }
+
     public static enum Enum{
         USER(1L, "user"),
         MERCHANT(2L, "merchant");
