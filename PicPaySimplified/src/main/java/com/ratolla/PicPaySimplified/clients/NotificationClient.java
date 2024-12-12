@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(
-        name = "${notification.client.url}"
+        name = "NotificationClient",
+        url = "${notification.client.url}"
 )
 public interface NotificationClient {
     @PostMapping

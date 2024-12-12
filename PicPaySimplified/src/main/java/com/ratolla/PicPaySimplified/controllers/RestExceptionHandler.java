@@ -21,11 +21,10 @@ public class RestExceptionHandler {
                 .stream()
                 .map(fieldError -> new fieldError(fieldError.getField(), fieldError.getDefaultMessage()))
                 .toList();
+
         var pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         pd.setTitle("Your Request Params didn’t validade");
         pd.setProperty("invalid-params", invalidFields);
-
-
         return pd;
     }
     public record fieldError(String name, String reason){}
