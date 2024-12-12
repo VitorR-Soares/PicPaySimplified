@@ -17,7 +17,7 @@
 </p>
 
 # Descrição
-Esse é um projeto que busca simular as operações básicas em um PicPaySimplificado. O objetivo principal foi treinar boas práticas na construção de API's, uso de Jakarta Persistence para mapeamento de entidades, uso de Docker pra configuração de bando de dados MySQL, comunicação com API externa comOpenFeign, validação de dados com Hibernaate e tratamento de exceções com ControllerAdvice e ProblemDetails.
+Esse é um projeto que busca simular as operações básicas em um PicPaySimplificado. O objetivo principal foi treinar boas práticas na construção de API's, uso de Jakarta Persistence para mapeamento de entidades, uso de Docker pra configuração de bando de dados MySQL, comunicação com API externa comOpenFeign, validação de dados com Hibernaate e tratamento de exceções com ControllerAdvice e ProblemDetails, e desenvolvimento de projeto em Arquitetura em Camadas
 
 ## Índice
 
