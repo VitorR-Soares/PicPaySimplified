@@ -8,7 +8,10 @@ import com.ratolla.PicPaySimplified.exceptions.UnauthorizedTransferForWallletTyp
 import com.ratolla.PicPaySimplified.exceptions.WalletNotFoundException;
 import com.ratolla.PicPaySimplified.repositories.TransferRepository;
 import com.ratolla.PicPaySimplified.repositories.WalletRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class TransferService {
@@ -24,7 +27,7 @@ public class TransferService {
         this.notificationService = notificationService;
         this.authorizationService = authorizationService;
     }
-
+    @Transactional
     public Transfer transfer(TransferDTO dto){
 
         var sender = walletRepository.findById(dto.sender())
@@ -32,7 +35,18 @@ public class TransferService {
         var receiver = walletRepository.findById(dto.receiver())
                 .orElseThrow(() -> new WalletNotFoundException(dto.sender()));
 
+        sender.debit(dto.value());
+        receiver.credit(dto.value());
 
+        Transfer newTransfer = new Transfer(sender, receiver, dto.value());
+
+        walletRepository.save(sender);
+        walletRepository.save(receiver);
+        transferRepository.save(newTransfer);
+
+        CompletableFuture.runAsync(()-> notificationService.sendNotification(newTransfer));
+
+        return newTransfer;
     }
 
     public void validateTransfer(TransferDTO dto, Wallet sender){

@@ -54,6 +54,13 @@ public class Wallet {
     public boolean isBalanceEnough(BigDecimal value){
         return value.doubleValue() <= this.balance.doubleValue();
     }
+    public void debit(BigDecimal value){
+        this.balance = this.balance.subtract(value);
+    }
+    public void credit(BigDecimal value){
+        this.balance = this.balance.add(value);
+    }
+
 
     @Override
     public boolean equals(Object o) {
