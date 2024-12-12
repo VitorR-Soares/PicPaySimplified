@@ -1,6 +1,7 @@
 package com.ratolla.PicPaySimplified.services;
 
 import com.ratolla.PicPaySimplified.clients.AuthorizationClient;
+import com.ratolla.PicPaySimplified.dto.TransferDTO;
 import com.ratolla.PicPaySimplified.entities.Transfer;
 import com.ratolla.PicPaySimplified.exceptions.PicPayException;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class AuthorizationService {
         this.authorizationClient = authorizationClient;
     }
 
-    public boolean isAuthorized(Transfer transfer){
+    public boolean isAuthorized(TransferDTO transfer){
         var response = authorizationClient.isAuthorized();
 
         if(response.getStatusCode().isError()){

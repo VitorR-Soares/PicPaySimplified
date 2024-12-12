@@ -48,7 +48,9 @@ public class Wallet {
     }
 
     public boolean isWalletTypeUser(){
-        return this.walletType.equals(WalletType.Enum.USER.get());
+        System.out.println(this.walletType.getId());
+        System.out.println(WalletType.Enum.USER.get().getId());
+        return this.walletType.getId() == WalletType.Enum.USER.get().getId();
     }
 
     public boolean isBalanceEnough(BigDecimal value){
@@ -59,20 +61,6 @@ public class Wallet {
     }
     public void credit(BigDecimal value){
         this.balance = this.balance.add(value);
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Wallet wallet = (Wallet) o;
-        return Objects.equals(id, wallet.id) && Objects.equals(fullname, wallet.fullname) && Objects.equals(cpfCnpj, wallet.cpfCnpj) && Objects.equals(email, wallet.email) && Objects.equals(password, wallet.password) && Objects.equals(balance, wallet.balance) && Objects.equals(walletType, wallet.walletType);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fullname, cpfCnpj, email, password, balance, walletType);
     }
 
     public Long getId() {

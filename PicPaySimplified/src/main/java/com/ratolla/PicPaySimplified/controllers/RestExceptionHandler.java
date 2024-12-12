@@ -23,7 +23,7 @@ public class RestExceptionHandler {
                 .toList();
 
         var pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        pd.setTitle("Your Request Params didn’t validade");
+        pd.setTitle("Your Request Params didn’t validate");
         pd.setProperty("invalid-params", invalidFields);
         return pd;
     }

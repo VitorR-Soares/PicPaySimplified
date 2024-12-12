@@ -4,6 +4,7 @@ import com.ratolla.PicPaySimplified.dto.TransferDTO;
 import com.ratolla.PicPaySimplified.entities.Transfer;
 import com.ratolla.PicPaySimplified.entities.Wallet;
 import com.ratolla.PicPaySimplified.exceptions.InsufficientBalanceException;
+import com.ratolla.PicPaySimplified.exceptions.UnauthorizedTransferException;
 import com.ratolla.PicPaySimplified.exceptions.UnauthorizedTransferForWallletTypeException;
 import com.ratolla.PicPaySimplified.exceptions.WalletNotFoundException;
 import com.ratolla.PicPaySimplified.repositories.TransferRepository;
@@ -35,6 +36,8 @@ public class TransferService {
         var receiver = walletRepository.findById(dto.receiver())
                 .orElseThrow(() -> new WalletNotFoundException(dto.sender()));
 
+        validateTransfer(dto, sender);
+
         sender.debit(dto.value());
         receiver.credit(dto.value());
 
@@ -51,10 +54,14 @@ public class TransferService {
 
     public void validateTransfer(TransferDTO dto, Wallet sender){
         if(!sender.isWalletTypeUser()){
+            System.out.println("Entendeu como falso");
             throw new UnauthorizedTransferForWallletTypeException();
         }
         if(!sender.isBalanceEnough(dto.value())){
             throw new InsufficientBalanceException();
+        }
+        if(!authorizationService.isAuthorized(dto)){
+            throw new UnauthorizedTransferException();
         }
     }
 
